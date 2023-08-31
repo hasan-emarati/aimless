@@ -1,0 +1,315 @@
+import 'package:flutter/material.dart';
+import 'package:App_SHe/Theme-Library/Theme.dart';
+
+import 'package:side_navigation/side_navigation.dart';
+
+import 'package:App_SHe/screens/EnPage/search-bar/search.dart';
+import 'package:App_SHe/screens/EnPage/search-bar/searchBar.dart';
+
+import 'package:App_SHe/screens/EnPage/Farm-routes/Animal-movements.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Animals-and-operations.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Browse-the-herd.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Daily-production.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Evaluation-of-breeding-center.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Quick-report.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Report-entries.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/Sperm-bank.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/batch-entry.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/herd-composition.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/herd-management.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/pharmacy.dart';
+import 'package:App_SHe/screens/EnPage/Farm-routes/the-last-situation.dart';
+
+void main() {
+  runApp(const FarmPage());
+}
+
+class FarmPage extends StatefulWidget {
+  const FarmPage({Key? key}) : super(key: key);
+
+  @override
+  _MainViewState createState() => _MainViewState();
+}
+
+class _MainViewState extends State<FarmPage> {
+  int currentPage = 0;
+  List<Widget> pages = const [
+    AnimalMovements(),
+    AnimalsAndOperations(),
+    batchEntry(),
+    BrowseTheHerd(),
+    DailyProduction(),
+    EvaluationOfBreedingCenter(),
+    herdComposition(),
+    herdManagement(),
+    pharmacy(),
+    QuickReport(),
+    ReportEntries(),
+    SpermBank(),
+    theLastSituation(),
+  ];
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+          SideNavigationBar(
+            selectedIndex: selectedIndex,
+            items: const [
+              SideNavigationBarItem(
+                icon: Icons.construction,
+                label: 'Animal Movements',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.alt_route_sharp,
+                label: 'Animals And Operations',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.ballot_outlined,
+                label: 'BatchEntry',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.preview,
+                label: 'Browse TheHerd',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.production_quantity_limits,
+                label: 'Daily Production',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.analytics_outlined,
+                label: 'Evaluation Of Breeding Center',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.auto_fix_normal,
+                label: 'herd Composition',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.checklist,
+                label: 'herd Management',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.vaccines,
+                label: 'pharmacy',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.report_gmailerrorred,
+                label: 'Quick Report',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.report_problem_sharp,
+                label: 'Report Entries',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.savings,
+                label: 'Sperm Bank',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.content_paste,
+                label: 'theLast Situation',
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                selectedIndex = index;
+              });
+            },
+            // Change the background color and disabled header/footer dividers
+            // Make use of standard() constructor for other themes
+            theme: SideNavigationBarTheme(
+              backgroundColor: Colors.black12,
+              togglerTheme: SideNavigationBarTogglerTheme.standard(),
+              itemTheme: SideNavigationBarItemTheme.standard(),
+              dividerTheme: SideNavigationBarDividerTheme.standard(),
+            ),
+          ),
+          Expanded(
+            child: pages.elementAt(selectedIndex),
+          )
+        ],
+      ),
+    );
+  }
+}
+/////////////////////////////////////////////////////////////
+///
+///
+import 'package:flutter/material.dart';
+
+import 'package:App_SHe/screens/EnPage/ControlPanel.dart';
+import 'package:App_SHe/screens/EnPage/Farm.dart';
+import 'package:App_SHe/screens/EnPage/store.dart';
+import 'package:App_SHe/screens/EnPage/User-Page.dart';
+import 'package:App_SHe/screens/EnPage/engin-Page.dart';
+import 'package:App_SHe/screens/EnPage/home-Page.dart';
+import 'package:App_SHe/screens/EnPage/news.Dart';
+import 'package:App_SHe/screens/EnPage/AI.Dart';
+import 'package:App_SHe/screens/EnPage/WorkPage.dart';
+import 'package:App_SHe/screens/EnPage/setting-Page.dart';
+import 'package:App_SHe/screens/EnPage/Weather.dart';
+import 'package:App_SHe/screens/EnPage/Chart.dart';
+import 'package:App_SHe/screens/EnPage/Alarms/main.dart';
+import 'package:App_SHe/screens/EnPage/note/note.dart';
+
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int currentPage = 0;
+  List<Widget> pages = const [
+    HomePage(),
+    UserPage(),
+    EnginPage(),
+    NewsPage(),
+    FarmPage(),
+    AiPage(),
+    WorkPage(),
+    weatherPageEn(),
+    StorePage(),
+    ChartPage(),
+    ControlPanel(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("App Bar"),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return NotePage();
+                  },
+                ),
+              );
+              debugPrint("NotePad");
+            },
+            icon: const Icon(Icons.note_add),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return Metronome();
+                  },
+                ),
+              );
+              debugPrint("Alarms");
+            },
+            icon: const Icon(Icons.alarm),
+          ),
+          IconButton(
+            onPressed: () {
+              debugPrint("Message");
+            },
+            icon: const Icon(Icons.notifications),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return const Settings();
+                  },
+                ),
+              );
+              debugPrint("setting");
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
+      ),
+      ///////////////////////////////////////////////////////////////////////////
+      body: pages[currentPage],
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(
+              icon: Icon(
+                Icons.home,
+                size: 35,
+              ),
+              label: "Home"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.space_dashboard,
+                size: 35,
+              ),
+              label: "Dashboard"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.engineering,
+                size: 35,
+              ),
+              label: "engin"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.newspaper_outlined,
+                size: 35,
+              ),
+              label: "news"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.agriculture,
+                size: 35,
+              ),
+              label: "Farm"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.smart_toy,
+                size: 35,
+              ),
+              label: "smart_toy"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.work,
+                size: 35,
+              ),
+              label: "work"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.sunny,
+                size: 35,
+              ),
+              label: "weather"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.store,
+                size: 35,
+              ),
+              label: "store"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.query_stats,
+                size: 35,
+              ),
+              label: "Chart"),
+          NavigationDestination(
+              icon: Icon(
+                Icons.pest_control,
+                size: 35,
+              ),
+              label: "Control Panel"),
+        ],
+        onDestinationSelected: (int index) {
+          setState(
+            () {
+              currentPage = index;
+            },
+          );
+        },
+        selectedIndex: currentPage,
+      ),
+    );
+  }
+}
